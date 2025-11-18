@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des ressources{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Liste des ressources</h1>
+
+        <a href="{{ path('admin_resource_new') }}">Ajouter une ressource</a>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Créée le</th>
+                    <th>Mis à jour</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for resource in resources %}
+                    <tr>
+                        <td>{{ resource.id }}</td>
+                        <td>{{ resource.name }}</td>
+                        <td>{{ resource.description }}</td>
+                        <td>{{ resource.createdAt|date('Y-m-d H:i:s') }}</td>
+                        <td>{{ resource.updatedAt|date('Y-m-d H:i:s') }}</td>
+                        <td>
+                            {# Futurs boutons d'action (voir, modifier, supprimer) #}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6">Aucune ressource pour l'instant.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
