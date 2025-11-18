@@ -20,7 +20,7 @@ class ResourceType extends AbstractType
             ->add('updatedAt', null, [
                 'widget' => 'single_text',
             ])*/
-        ;
+            ->add('category');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
