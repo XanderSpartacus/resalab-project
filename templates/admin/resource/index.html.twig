@@ -12,6 +12,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Catégorie</th>
                     <th>Nom</th>
                     <th>Description</th>
                     <th>Créée le</th>
@@ -23,6 +24,7 @@
                 {% for resource in resources %}
                     <tr>
                         <td>{{ resource.id }}</td>
+                        <td>{{ resource.category.name }}</td>
                         <td>{{ resource.name }}</td>
                         <td>{{ resource.description }}</td>
                         <td>{{ resource.createdAt|date('Y-m-d H:i:s') }}</td>
@@ -33,7 +35,7 @@
                     </tr>
                     {% else %}
                     <tr>
-                        <td colspan="6">Aucune ressource pour l'instant.</td>
+                        <td colspan="7">Aucune ressource pour l'instant.</td>
                     </tr>
                 {% endfor %}
             </tbody>
