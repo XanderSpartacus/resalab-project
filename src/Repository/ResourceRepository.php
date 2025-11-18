@@ -16,6 +16,17 @@ class ResourceRepository extends ServiceEntityRepository
         parent::__construct($registry, Resource::class);
     }
 
+    public function findByCategory(\App\Entity\Category $category): array
+    {
+        return $this->createQueryBuilder('r') // 'r' est un alias pour l'entité Resource
+            ->andWhere('r.category = :category')
+            ->setParameter('category', $category)
+            ->orderBy('r.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     //    /**
     //     * @return Resource[] Returns an array of Resource objects
     //     */

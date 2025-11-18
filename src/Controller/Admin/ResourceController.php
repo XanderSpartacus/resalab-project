@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Resource;
 use App\Form\ResourceType;
+use App\Repository\CategoryRepository;
 use App\Repository\ResourceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,10 +16,25 @@ use Symfony\Component\Routing\Annotation\Route;
 class ResourceController extends AbstractController
 {
     #[Route('/', name: 'admin_resource_index', methods: ['GET'])]
-    public function index(ResourceRepository $resourceRepository): Response
-    {
+    public function index(
+        Request $request,
+        ResourceRepository $resourceRepository,
+        CategoryRepository $categoryRepository
+    ): Response {
+        $categories = $categoryRepository->findAll();
+        $selectedCategoryId = $request->query->get('category');
+
+        if($selectedCategoryId){
+            $selectedCategory = $categoryRepository->find($selectedCategoryId);
+            $resources = $selectedCategory ? $resourceRepository->findByCategory($selectedCategory) : [];
+        }else{
+            $resources = $resourceRepository->findBy([], ['createdAt' => 'DESC']);
+        }
+
         return $this->render('admin/resource/index.html.twig', [
-            'resources' => $resourceRepository->findAll(),
+            'resources' => $resources,
+            'categories' => $categories,
+            'selectedCategoryId' => $selectedCategoryId
         ]);
     }
 
