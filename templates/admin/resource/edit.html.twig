@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Ressource{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Modifier la Ressource</h1>
+
+        {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.category) }}
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <a href="{{ path('admin_resource_index') }}" class="btn btn-secondary btn-lg">Retour à la liste</a>
+            <button class="btn btn-primary btn-lg">{{ button_label|default('Mettre à jour') }}</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

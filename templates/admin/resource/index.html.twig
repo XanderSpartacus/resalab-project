@@ -54,7 +54,15 @@
                         <td>{{ resource.createdAt|date('Y-m-d H:i:s') }}</td>
                         <td>{{ resource.updatedAt|date('Y-m-d H:i:s') }}</td>
                         <td>
-                            {# Futurs boutons d'action (voir, modifier, supprimer) #}
+                            <a href="{{ path('admin_resource_edit', { id: resource.id }) }}" class="btn btn-sm btn-secondary">
+                                <i class="fas fa-edit"></i> Modifier
+                            </a>
+                            <form method="post" action="{{ path('admin_resource_delete', { id: resource.id }) }}" onsubmit="return confirm('Êtes-vous sur de vouloir supprimer cette ressource ?');" style="display: inline-block;">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ resource.id) }}">
+                                <button class="btn btn-sm btn-danger">
+                                    <i class="fas fa-trash"></i> Supprimer
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     {% else %}

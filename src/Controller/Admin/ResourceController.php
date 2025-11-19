@@ -63,4 +63,41 @@ class ResourceController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/{id}/edit', name: 'admin_resource_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Resource $resource, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(ResourceType::class, $resource);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Met à jour la date de modification
+            $resource->setUpdatedAt(new \DateTimeImmutable());
+            $entityManager->flush(); // Pas besoin de persist car l'entité est déjà gérée par Doctrine
+
+            $this->addFlash('success', 'La ressource a été modifiée avec succès.');
+
+            return $this->redirectToRoute('admin_resource_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('admin/resource/edit.html.twig', [
+            'resource' => $resource,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'admin_resource_delete', methods: ['POST'])]
+    public function delete(Request $request, Resource $resource, EntityManagerInterface $entityManager): Response
+    {
+        // Vérifie le jeton CSRF pour s'assurer que la requête provient bien de notre application
+        if ($this->isCsrfTokenValid('delete'.$resource->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($resource); // Marque l'entité pour la suppression
+            $entityManager->flush(); // Execute la suppression en base de données
+            $this->addFlash('success', 'La ressource a été supprimée avec succès.');
+        } else {
+            $this->addFlash('error', 'Jeton CSRF invalide. La suppression a été annulée');
+        }
+
+        return $this->redirectToRoute('admin_resource_index', [], Response::HTTP_SEE_OTHER);
+    }
 }
