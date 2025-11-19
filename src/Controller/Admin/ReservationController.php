@@ -37,6 +37,8 @@ class ReservationController extends AbstractController
             $entityManager->persist($reservation);
             $entityManager->flush();
 
+            $this->addFlash('success', 'La réservation a été créée avec succès.');
+
             return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -64,6 +66,8 @@ class ReservationController extends AbstractController
             $reservation->setUpdatedAt(new \DateTimeImmutable()); // Mise à jour de updatedAt
             $entityManager->flush();
 
+            $this->addFlash('success', 'La réservation a été modifiée avec succès.');
+
             return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -79,6 +83,8 @@ class ReservationController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$reservation->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($reservation);
             $entityManager->flush();
+
+            $this->addFlash('success', 'La réservation a été supprimée avec succès.');
         }
 
         return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
