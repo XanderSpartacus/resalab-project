@@ -14,6 +14,7 @@
                     <a class="nav-link {{ app.request.get('_route') == 'app_main' ? 'active' : '' }}"
                        aria-current="page" href="{{ path('app_main') }}">Accueil</a>
                 </li>
+                {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item">
                     <a class="nav-link {{ app.request.get('_route') == 'admin_resource_index' ? 'active' : '' }}"
                        href="{{ path('admin_resource_index') }}">
@@ -26,6 +27,7 @@
                         Ajouter une ressource
                     </a>
                 </li>
+                {% endif %}
             </ul>
             <ul class="navbar-nav ms-auto">
                 {% if app.user %}
