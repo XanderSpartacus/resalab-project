@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil - ResaLab{% endblock %}
+{% block title %}{{ 'app.index.title'|trans }}{% endblock %}
 
 {% block body %}
     <main>
@@ -16,10 +16,10 @@
                 ">
                 <div class="mask d-flex justify-content-center align-items-center h-100" style="background-color: rgba(0, 0, 0, 0.6)">
                     <div class="text-white">
-                        <h1 class="mb-3 display-3 fw-bold" style="text-shadow:0 2px 6px rgba(0,0,0,0.5);">Bienvenue sur ResaLab</h1>
-                        <h4 class="mb-4">Votre plateforme intuitive pour la gestion et la réservation de ressources de laboratoire</h4>
-                        <a class="btn btn-primary btn-lg m-2" href="{{ path('app_about') }}" role="button">Découvrir Resalab</a>
-                        <a class="btn btn-outline-light btn-lg m-2" href="{{ path('admin_resource_index') }}" role="button">Voir les ressources</a>
+                        <h1 class="mb-3 display-3 fw-bold" style="text-shadow:0 2px 6px rgba(0,0,0,0.5);">{{ 'app.index.h1'|trans }}</h1>
+                        <h4 class="mb-4">{{ 'app.index.h4'|trans }}</h4>
+                        <a class="btn btn-primary btn-lg m-2" href="{{ path('app_about') }}" role="button">{{ 'app.index.discover'|trans }}</a>
+                        <a class="btn btn-outline-light btn-lg m-2" href="{{ path('admin_resource_index') }}" role="button">{{ 'app.index.showRessource'|trans }}</a>
                     </div>
                 </div>
             </div>
@@ -28,18 +28,15 @@
         {# SECTION AVANTAGES #}
         <section class="py-5 bg-light">
             <div class="container">
-                <h2 class="text-center fw-bold mb-5">Pourquoi utiliser ResaLab ?</h2>
+                <h2 class="text-center fw-bold mb-5">{{ 'app.index.h2'|trans }}</h2>
 
                 <div class="row g-4">
                     <div class="col-md-4">
                         <div class="card shadow-sm h-100 border-0">
                             <div class="card-body p-4 text-center">
                                 <div class="display-5 mb-3">🧪</div>
-                                <h5 class="fw-bold mb-3">Accès rapide aux équipements</h5>
-                                <p>
-                                    Trouvez et réservez microscopes, salles spécialisées, appareils de mesure
-                                    ou tous types de matériels en quelques clics.
-                                </p>
+                                <h5 class="fw-bold mb-3">{{ 'app.index.avantages.access.h5'|trans }}</h5>
+                                <p>{{ 'app.index.avantages.access.p'|trans }}</p>
                             </div>
                         </div>
                     </div>
@@ -48,11 +45,8 @@
                         <div class="card shadow-sm h-100 border-0">
                             <div class="card-body p-4 text-center">
                                 <div class="display-5 mb-3">📅</div>
-                                <h5 class="fw-bold mb-3">Gestion simplifiée des réservations</h5>
-                                <p>
-                                    Consultez vos créneaux, organisez vos sessions de travail
-                                    et suivez l’utilisation des ressources en temps réel.
-                                </p>
+                                <h5 class="fw-bold mb-3">{{ 'app.index.avantages.gestion.h5'|trans }}</h5>
+                                <p>{{ 'app.index.avantages.gestion.p'|trans }}</p>
                             </div>
                         </div>
                     </div>
@@ -61,11 +55,8 @@
                         <div class="card shadow-sm h-100 border-0">
                             <div class="card-body p-4 text-center">
                                 <div class="display-5 mb-3">🔒</div>
-                                <h5 class="fw-bold mb-3">Plateforme fiable et sécurisée</h5>
-                                <p>
-                                    ResaLab assure une gestion rigoureuse des accès, des créneaux
-                                    et des autorisations pour un environnement de recherche optimal.
-                                </p>
+                                <h5 class="fw-bold mb-3">{{ 'app.index.avantages.secure.h5'|trans }}</h5>
+                                <p>{{ 'app.index.avantages.secure.p'|trans }}</p>
                             </div>
                         </div>
                     </div>
@@ -76,9 +67,9 @@
         {# SECTION CTA #}
         <section class="py-5 bg-primary text-light text-center">
             <div class="container">
-                <h2>Prêt à simplifier la gestion de vos laboratoires ?</h2>
-                <p class="lead">Rejoignez la communauté ResaLab et transformez votre manière de travailler.</p>
-                <a class="btn btn-light btn-lg" href="{{ path('app_register') }}" role="button">Commencer</a>
+                <h2>{{ 'app.index.cta.h2'|trans }}</h2>
+                <p class="lead">{{ 'app.index.cta.p'|trans }}</p>
+                <a class="btn btn-light btn-lg" href="{{ path('app_register') }}" role="button">{{ 'app.index.cta.link'|trans }}</a>
             </div>
         </section>
     </main>

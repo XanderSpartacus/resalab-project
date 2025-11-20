@@ -1,0 +1,22 @@
+app:
+    index:
+        title: Home - ResaLab
+        h1: Welcome to ResaLab
+        h4: Your intuitive platform for managing and booking laboratory resources
+        discover: Discover ResaLab
+        showRessource: View resources
+        h2: Why use ResaLab?
+        avantages:
+            access:
+                h5: Quick access to equipment
+                p: Find and book microscopes, specialized rooms, measuring devices, or any type of equipment in just a few clicks.
+            gestion:
+                h5: Simplified reservation management
+                p: Check your slots, organize your work sessions, and monitor resource usage in real time.
+            secure:
+                h5: Reliable and secure platform
+                p: ResaLab ensures strict management of access, time slots, and permissions for an optimal research environment.
+        cta:
+            h2: Ready to simplify your laboratory management?
+            p: Join the ResaLab community and transform the way you work.
+            link: Get Started
