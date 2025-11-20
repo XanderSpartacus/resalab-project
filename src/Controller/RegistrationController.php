@@ -121,7 +121,7 @@ class RegistrationController extends AbstractController
     public function sendVerificationEmail(User $user): void
     {
         $signatureComponents = $this->verifyEmailHelper->generateSignature(
-            'app_resend_verify_email',
+            'app_verify_email',
             $user->getId(),
             $user->getEmail(),
             ['id' => $user->getId()] // Permet la validation pour un utilisateur non connecté
