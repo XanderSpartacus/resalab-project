@@ -6,6 +6,7 @@ use App\Entity\Reservation;
 use App\Form\ReservationType;
 use App\Repository\ReservationRepository;
 use App\Security\Voter\ReservationVoter;
+use App\Services\ReservationNotifierService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +32,7 @@ class ReservationController extends AbstractController
     }
 
     #[Route('/new', name: 'app_reservation_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, ReservationNotifierService $notifier): Response
     {
         // On ajoute cette ligne au début de la méthode
         $this->denyAccessUnlessGranted(ReservationVoter::CREATE);
@@ -55,6 +56,9 @@ class ReservationController extends AbstractController
             $reservation->setUpdatedAt(new \DateTimeImmutable()); // Initialisation de updatedAt
             $entityManager->persist($reservation);
             $entityManager->flush();
+
+            // Notifier l'admin après la création et la persistance de la réservation
+            $notifier->notifyAdminAboutNewReservation($reservation);
 
             $this->addFlash('success', 'La réservation a été créée avec succès.');
 
