@@ -3,3 +3,7 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+i18n_main:
+    resource: routes/i18n_main_routes.yaml
+    prefix: '/{_locale<%app.supported_locales%>}' # Applique le préfixe de la locale automatiquement

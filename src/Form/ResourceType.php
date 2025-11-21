@@ -12,15 +12,15 @@ class ResourceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('description')
-            /*->add('createdAt', null, [
-                'widget' => 'single_text',
+            ->add('name', null, [
+                'label' => 'resource_form.name_label'
             ])
-            ->add('updatedAt', null, [
-                'widget' => 'single_text',
-            ])*/
-            ->add('category');
+            ->add('description', null, [
+                'label' => 'resource_form.description_label'
+            ])
+            ->add('category', null, [
+                'label' => 'resource_form.category_label'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

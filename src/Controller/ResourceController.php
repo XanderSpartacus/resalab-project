@@ -12,8 +12,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[Route('/admin/resource')]
+#[Route('/{_locale<%app.supported_locales%>}/resource')]
 class ResourceController extends AbstractController
 {
     #[Route('/', name: 'app_resource_index', methods: ['GET'])]
@@ -40,7 +41,7 @@ class ResourceController extends AbstractController
     }
 
     #[Route('/new', name: 'app_resource_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         $this->denyAccessUnlessGranted(ResourceVoter::CREATE);
 
@@ -56,7 +57,8 @@ class ResourceController extends AbstractController
             $entityManager->persist($resource);
             $entityManager->flush();
 
-            $this->addFlash('success', 'La ressource a été créée avec succès.');
+            // Utilisation du translator pour afficher un message flash
+            $this->addFlash('success', $translator->trans('resource.flash.create_success'));
 
             return $this->redirectToRoute('app_resource_index');
         }

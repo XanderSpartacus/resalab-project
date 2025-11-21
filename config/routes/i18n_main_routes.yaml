@@ -1,0 +1,12 @@
+# config/routes/i18n_main_routes.yaml
+app_about:
+    path:
+        en: about
+        fr: a-propos
+    controller: App\Controller\MainController::about
+
+app_contact:
+    path:
+        en: contact
+        fr: contact
+    controller: App\Controller\MainController::contact

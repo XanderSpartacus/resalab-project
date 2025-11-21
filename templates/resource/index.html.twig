@@ -38,35 +38,35 @@
         <table class="table table-striped mt-4">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Catégorie</th>
-                    <th>Nom</th>
-                    <th>Description</th>
-                    <th>Créée le</th>
-                    <th>Mis à jour</th>
-                    <th>Actions</th>
+                    <th>{{ 'resource.table.header_id'|trans }}</th>
+                    <th>{{ 'resource.table.header_category'|trans }}</th>
+                    <th>{{ 'resource.table.header_name'|trans }}</th>
+                    <th>{{ 'resource.table.header_description'|trans }}</th>
+                    <th>{{ 'resource.table.header_created_at'|trans }}</th>
+                    <th>{{ 'resource.table.header_updated_at'|trans }}</th>
+                    <th>{{ 'resource.table.header_actions'|trans }}</th>
                 </tr>
             </thead>
             <tbody>
                 {% for resource in resources %}
                     <tr>
                         <td>{{ resource.id }}</td>
-                        <td>{{ resource.category.name }}</td>
+                        <td><span class="badge bg-secondary">{{ resource.category.name }}</span></td>
                         <td>{{ resource.name }}</td>
-                        <td>{{ resource.description }}</td>
+                        <td>{{ resource.description|slice(0, 50) ~ '...' }}</td>
                         <td>{{ resource.createdAt|date('Y-m-d H:i:s') }}</td>
                         <td>{{ resource.updatedAt|date('Y-m-d H:i:s') }}</td>
                         <td>
                             {# On ajoute la condition #}
                             {% if is_granted('RESOURCE_VIEW', resource) %}
                                 <a href="{{ path('app_resource_show', { id: resource.id }) }}" class="btn btn-sm btn-info" title="Voir la ressource">
-                                    <i class="fas fa-edit"></i> Voir
+                                    <i class="fas fa-eye"></i>
                                 </a>
                             {% endif %}
 
                             {% if is_granted('RESOURCE_EDIT', resource) %}
                                 <a href="{{ path('app_resource_edit', { id: resource.id }) }}" class="btn btn-sm btn-secondary" title="Modifier la ressource">
-                                    <i class="fas fa-edit"></i> Modifier
+                                    <i class="fas fa-edit"></i>
                                 </a>
                             {% endif %}
 
@@ -74,7 +74,7 @@
                                 <form method="post" action="{{ path('app_resource_delete', { id: resource.id }) }}" onsubmit="return confirm('Êtes-vous sur de vouloir supprimer cette ressource ?');" style="display: inline-block;">
                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ resource.id) }}">
                                     <button class="btn btn-sm btn-danger" aria-label="Supprimer la ressource">
-                                        <i class="fas fa-trash"></i> Supprimer
+                                        <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
                             {% endif %}

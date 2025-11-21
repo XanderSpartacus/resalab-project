@@ -1,22 +1,79 @@
-app:
-    index:
-        title: Home - ResaLab
-        h1: Welcome to ResaLab
-        h4: Your intuitive platform for managing and booking laboratory resources
-        discover: Discover ResaLab
-        showRessource: View resources
-        h2: Why use ResaLab?
-        avantages:
-            access:
-                h5: Quick access to equipment
-                p: Find and book microscopes, specialized rooms, measuring devices, or any type of equipment in just a few clicks.
-            gestion:
-                h5: Simplified reservation management
-                p: Check your slots, organize your work sessions, and monitor resource usage in real time.
-            secure:
-                h5: Reliable and secure platform
-                p: ResaLab ensures strict management of access, time slots, and permissions for an optimal research environment.
-        cta:
-            h2: Ready to simplify your laboratory management?
-            p: Join the ResaLab community and transform the way you work.
-            link: Get Started
+# Translations file for English
+# translations/messages.en.yaml
+
+# Navigation
+nav.home: Home
+nav.reservations_admin: Manage Reservations
+nav.reservations_user: My Reservations
+nav.resources_admin: Manage Resources
+nav.resources_user: All Resources
+nav.hello: Hello
+nav.logout: Logout
+nav.login: Login
+nav.register: Register
+
+# Page: Resource Index
+resource.index.title: Resources List
+resource.index.filters: Filters
+resource.index.filter_by_category: Filter by category
+resource.index.all_categories: All categories
+resource.index.filter_button: Filter
+resource.index.reset_button: Reset
+resource.table.header_id: Id
+resource.table.header_category: Category
+resource.table.header_name: Name
+resource.table.header_description: Description
+resource.table.header_created_at: Created at
+resource.table.header_updated_at: Updated at
+resource.table.header_actions: Actions
+resource.table.no_resource_found: No resource found.
+
+# Page: Home
+home.title: Home - ResaLab
+home.hero.title: Welcome to ResaLab
+home.hero.subtitle: Your intuitive platform for managing and booking laboratory resources
+home.hero.button_discover: Discover ResaLab
+home.hero.button_resources: See resources
+home.features.title: Why use ResaLab?
+home.features.feature1.title: Quick access to equipment
+home.features.feature1.text: Find and book microscopes, specialized rooms, measuring devices or all types of materials in just a few clicks.
+home.features.feature2.title: Simplified booking management
+home.features.feature2.text: Check your time slots, organize your work sessions and track the use of resources in real time.
+home.features.feature3.title: Reliable and secure platform
+home.features.feature3.text: ResaLab ensures rigorous management of access, time slots and authorizations for an optimal research environment.
+home.cta.title: Ready to simplify the management of your laboratories?
+home.cta.subtitle: Join the ResaLab community and transform the way you work.
+home.cta.button: Get Started
+
+# Footer
+footer.copyright: '© %year% ResaLab. All rights reserved.'
+footer.about: About
+footer.contact: Contact
+
+# Page: About
+about.title: About ResaLab
+about.hero.title: About ResaLab
+about.hero.subtitle: The platform that simplifies laboratory resource management
+about.mission.title: Our Mission
+about.mission.p1: Welcome to **ResaLab**, your dedicated platform for managing and reserving laboratory resources. Our mission is to simplify access to equipment and workspaces for researchers, students, and professionals, by optimizing infrastructure utilization.
+about.mission.p2: Whether you need a state-of-the-art microscope, an equipped conference room, or a specific test bench, ResaLab offers an intuitive interface for finding, booking, and managing your resources with ease.
+about.mission.p3: We are committed to providing a reliable and efficient service to support innovation and research.
+about.explore_resources_button: Explore available resources
+
+# Resource Form Labels
+resource_form.name_label: Resource Name
+resource_form.description_label: Resource Description
+resource_form.category_label: Category
+
+# Resource Flash Messages
+resource.flash.create_success: The resource has been created successfully.
+
+# Reservation Flash Messages
+reservation.flash.create_success: The reservation has been created successfully.
+
+# Home Stats
+home.stats.title: Resource Statistics
+home.stats.total_resources: Total number of resources
+home.stats.resources_by_category: Resources by category
+home.stats.no_categories: No categories defined.
+

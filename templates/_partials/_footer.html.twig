@@ -1,9 +1,9 @@
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container text-center">
-        <span class="text-muted">&copy; {{ "now"|date('Y') }} Resalab. Tous droits réservés</span>
+        <span class="text-muted">{{ 'footer.copyright'|trans({'%year%': "now"|date('Y')}) }}</span>
         <span class="text-muted mx-2">|</span>
-        <a href="{{ path('app_about') }}" class="text-muted">À propos</a>
+        <a href="{{ path('app_about') }}" class="text-muted">{{ 'footer.about'|trans }}</a>
         <span class="text-muted mx-2">|</span>
-        <a href="{{ path('app_contact') }}" class="text-muted">Contact</a>
+        <a href="{{ path('app_contact') }}" class="text-muted">{{ 'footer.contact'|trans }}</a>
     </div>
 </footer>

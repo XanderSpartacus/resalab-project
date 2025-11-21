@@ -47,13 +47,13 @@
                             {# Ne pas oublier de rajouter l'objet Reservation en second paramètre de is_granted() #}
                             {% if is_granted('RESERVATION_VIEW', reservation) %}
                             <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}" class="btn btn-info btn-sm me-1" title="Voir">
-                                <i class="fas fa-eye"></i> Voir
+                                <i class="fas fa-eye"></i>
                             </a>
                             {% endif %}
 
                             {% if is_granted('RESERVATION_EDIT', reservation) %}
                             <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}" class="btn btn-warning btn-sm me-1" title="Modifier">
-                                <i class="fas fa-edit"></i> Modifier
+                                <i class="fas fa-edit"></i>
                             </a>
                             {% endif %}
 

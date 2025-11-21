@@ -1,23 +1,79 @@
-app:
-    index:
-        title: Accueil - ResaLab
-        h1: Bienvenue sur ResaLab
-        h4: Votre plateforme intuitive pour la gestion et la réservation de ressources de laboratoire
-        discover: Découvrir Resalab
-        showRessource: Voir les ressources
-        h2: Pourquoi utiliser ResaLab ?
-        avantages:
-            access:
-                h5: Accès rapide aux équipements
-                p: Trouvez et réservez microscopes, salles spécialisées, appareils de mesure ou tous types de matériels en quelques clics.
-            gestion:
-                h5: Gestion simplifiée des réservations
-                p: Consultez vos créneaux, organisez vos sessions de travail et suivez l’utilisation des ressources en temps réel.
-            secure:
-                h5: Plateforme fiable et sécurisée
-                p: ResaLab assure une gestion rigoureuse des accès, des créneaux et des autorisations pour un environnement de recherche optimal.
-        cta:
-            h2: Prêt à simplifier la gestion de vos laboratoires ?
-            p: Rejoignez la communauté ResaLab et transformez votre manière de travailler.
-            link: Commencer
+# Fichier de traductions pour le Français
+# translations/messages.fr.yaml
+
+# Navigation
+nav.home: Accueil
+nav.reservations_admin: Gérer les réservations
+nav.reservations_user: Mes réservations
+nav.resources_admin: Gérer les ressources
+nav.resources_user: Toutes les ressources
+nav.hello: Bonjour
+nav.logout: Déconnexion
+nav.login: Connexion
+nav.register: Inscription
+
+# Page: Resource Index
+resource.index.title: Liste des Ressources
+resource.index.filters: Filtres
+resource.index.filter_by_category: Filtrer par catégorie
+resource.index.all_categories: Toutes les catégories
+resource.index.filter_button: Filtrer
+resource.index.reset_button: Réinitialiser
+resource.table.header_id: Id
+resource.table.header_category: Catégorie
+resource.table.header_name: Nom
+resource.table.header_description: Description
+resource.table.header_created_at: Créé le
+resource.table.header_updated_at: Mis à jour le
+resource.table.header_actions: Actions
+resource.table.no_resource_found: Aucune ressource trouvée.
+
+# Page: Home
+home.title: Accueil - ResaLab
+home.hero.title: Bienvenue sur ResaLab
+home.hero.subtitle: Votre plateforme intuitive pour la gestion et la réservation de ressources de laboratoire
+home.hero.button_discover: Découvrir ResaLab
+home.hero.button_resources: Voir les ressources
+home.features.title: Pourquoi utiliser ResaLab ?
+home.features.feature1.title: Accès rapide aux équipements
+home.features.feature1.text: Trouvez et réservez microscopes, salles spécialisées, appareils de mesure ou tous types de matériels en quelques clics.
+home.features.feature2.title: Gestion simplifiée des réservations
+home.features.feature2.text: Consultez vos créneaux, organisez vos sessions de travail et suivez l’utilisation des ressources en temps réel.
+home.features.feature3.title: Plateforme fiable et sécurisée
+home.features.feature3.text: ResaLab assure une gestion rigoureuse des accès, des créneaux et des autorisations pour un environnement de recherche optimal.
+home.cta.title: Prêt à simplifier la gestion de vos laboratoires ?
+home.cta.subtitle: Rejoignez la communauté ResaLab et transformez votre manière de travailler.
+home.cta.button: Commencer
+
+# Footer
+footer.copyright: '© %year% ResaLab. Tous droits réservés.'
+footer.about: À propos
+footer.contact: Contact
+
+# Page: About
+about.title: À propos de ResaLab
+about.hero.title: À propos de ResaLab
+about.hero.subtitle: La plateforme qui simplifie la gestion des ressources de laboratoire
+about.mission.title: Notre mission
+about.mission.p1: Bienvenue sur **ResaLab**, votre plateforme dédiée à la gestion et à la réservation de ressources de laboratoire. Notre mission est de simplifier l'accès aux équipements et aux espaces de travail pour les chercheurs, les étudiants et les professionnels, en optimisant l'utilisation des infrastructures.
+about.mission.p2: Que vous ayez besoin d’un microscope de pointe, d’une salle de conférence équipée, ou d’un banc d’essai spécifique, ResaLab vous offre une interface intuitive pour trouver, réserver et gérer vos ressources en toute simplicité.
+about.mission.p3: Nous nous engageons à fournir un service fiable et efficace pour soutenir l’innovation et la recherche.
+about.explore_resources_button: Explorer les ressources disponibles
+
+# Resource Form Labels
+resource_form.name_label: Nom de la ressource
+resource_form.description_label: Description de la ressource
+resource_form.category_label: Catégorie
+
+# Resource Flash Messages
+resource.flash.create_success: La ressource a été créée avec succès.
+
+# Reservation Flash Messages
+reservation.flash.create_success: La réservation a été créée avec succès.
+
+# Home Stats
+home.stats.title: Statistiques des Ressources
+home.stats.total_resources: Nombre total de ressources
+home.stats.resources_by_category: Ressources par catégorie
+home.stats.no_categories: Aucune catégorie définie.
 

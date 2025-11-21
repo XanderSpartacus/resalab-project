@@ -1,21 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}A propos de Resalab{% endblock %}
+{% block title %}{{ 'about.title'|trans }}{% endblock %}
 
 {% block body %}
-    <div class="container mt-4">
-        <h1>A propos de Resalab</h1>
-        <p>
-            Bienvenue sur ResaLab, votre plateforme dédiée à la gestion et à la réservation de ressources de laboratoire.
-            Notre mission est de simplifier l'accès aux équipements et aux espaces de travail pour les chercheurs,
-            les étudiants et les professionnels, en optimisant l'utilisation des infrastructures.
-        </p>
-        <p>
-            Que vous ayez besoin d'un microscope de pointe, d'une salle de conférence équipée, ou d'un banc d'essai spécifique,
-            ResaLab vous offre une interface intuitive pour trouver, réserver et gérer vos ressources en toute simplicité.
-        </p>
-        <p>
-            Nous nous engageons à fournir un service fiable et efficace pour soutenir l'innovation et la recherche.
-        </p>
+
+    {# Section Hero #}
+    <div class="position-relative">
+        <img src="{{ asset('images/lab.png') }}"
+             alt="Laboratoire moderne"
+             class="w-100"
+             style="height: 350px; object-fit: cover; filter: brightness(65%);">
+
+        <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
+            <h1 class="fw-bold display-5">{{ 'about.hero.title'|trans }}</h1>
+            <p class="lead">{{ 'about.hero.subtitle'|trans }}</p>
+        </div>
     </div>
+
+    {# Section Contenu #}
+    <div class="container my-5">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+
+                <div class="p-4 p-lg-5 bg-white shadow-sm rounded-4 border">
+                    <h2 class="mb-4 text-primary fw-semibold">{{ 'about.mission.title'|trans }}</h2>
+
+                    <p class="fs-5">
+                        {{ 'about.mission.p1'|trans|raw }}
+                    </p>
+
+                    <p class="fs-5">
+                        {{ 'about.mission.p2'|trans }}
+                    </p>
+
+                    <p class="fs-5">
+                        {{ 'about.mission.p3'|trans }}
+                    </p>
+
+                    <hr class="my-4">
+
+                    <div class="text-center">
+                        <a href="{{ path('app_resource_index') }}" class="btn btn-primary btn-lg px-4 rounded-pill shadow-sm">
+                            {{ 'about.explore_resources_button'|trans }}
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
 {% endblock %}
