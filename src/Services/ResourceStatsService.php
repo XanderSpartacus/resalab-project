@@ -4,12 +4,11 @@ namespace App\Services;
 
 use App\Repository\CategoryRepository;
 use App\Repository\ResourceRepository;
-use MongoDB\BSON\Int64;
 
 class ResourceStatsService
 {
     private ResourceRepository $resourceRepository;
-    private CategoryRepository $categoryRepositor;
+    private CategoryRepository $categoryRepository;
     public function __construct(ResourceRepository $resourceRepository, CategoryRepository $categoryRepository)
     {
         $this->resourceRepository = $resourceRepository;
