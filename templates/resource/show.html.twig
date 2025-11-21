@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la Ressource{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>{{ resource.name }}</h1>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ resource.name }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ resource.category.name }}</h6>
+                <p class="card-text">{{ resource.description }}</p>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Créé le: {{ resource.createdAt ? resource.createdAt|date('d/m/Y H:i') : '' }}</li>
+                    <li class="list-group-item">Mis à jour le: {{ resource.updatedAt ? resource.updatedAt|date('d/m/Y H:i') : '' }}</li>
+                </ul>
+                <div class="mt-3">
+                    <a href="{{ path('app_resource_index') }}" class="btn btn-secondary">Retour à la liste</a>
+                    {% if is_granted('RESOURCE_EDIT', resource) %}
+                        <a href="{{ path('app_resource_edit', {'id': resource.id}) }}" class="btn btn-primary">Modifier</a>
+                    {% endif %}
+                    {% if is_granted('RESOURCE_DELETE', resource) %}
+                        <form method="post" action="{{ path('app_resource_delete', {'id': resource.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette ressource ?');" style="display: inline-block;">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ resource.id) }}">
+                            <button class="btn btn-danger">Supprimer</button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -6,7 +6,10 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1>Liste des ressources</h1>
-            <a href="{{ path('admin_resource_new') }}" class="btn btn-primary">Ajouter une ressource</a>
+            {# On ajoute la condition #}
+            {% if is_granted('RESOURCE_CREATE') %}
+                <a href="{{ path('app_resource_new') }}" class="btn btn-primary">Ajouter une ressource</a>
+            {% endif %}
         </div>
 
         <div class="card mt-4">
@@ -14,7 +17,7 @@
                 Filtres
             </div>
             <div class="card-body">
-                <form method="get" action="{{ path('admin_resource_index') }}" class="row g-3 align-items-end">
+                <form method="get" action="{{ path('app_resource_index') }}" class="row g-3 align-items-end">
                     <div class="col-md-4">
                         <label for="category" class="form-label">Filtrer par catégorie</label>
                         <select class="form-select" id="category" name="category">
@@ -26,7 +29,7 @@
                     </div>
                     <div class="col-md-4">
                         <button type="submit" class="btn btn-primary">Filtrer</button>
-                        <a href="{{ path('admin_resource_index') }}" class="btn btn-secondary">Réinitialiser</a>
+                        <a href="{{ path('app_resource_index') }}" class="btn btn-secondary">Réinitialiser</a>
                     </div>
                 </form>
             </div>
@@ -54,15 +57,27 @@
                         <td>{{ resource.createdAt|date('Y-m-d H:i:s') }}</td>
                         <td>{{ resource.updatedAt|date('Y-m-d H:i:s') }}</td>
                         <td>
-                            <a href="{{ path('admin_resource_edit', { id: resource.id }) }}" class="btn btn-sm btn-secondary">
-                                <i class="fas fa-edit"></i> Modifier
-                            </a>
-                            <form method="post" action="{{ path('admin_resource_delete', { id: resource.id }) }}" onsubmit="return confirm('Êtes-vous sur de vouloir supprimer cette ressource ?');" style="display: inline-block;">
-                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ resource.id) }}">
-                                <button class="btn btn-sm btn-danger">
-                                    <i class="fas fa-trash"></i> Supprimer
-                                </button>
-                            </form>
+                            {# On ajoute la condition #}
+                            {% if is_granted('RESOURCE_VIEW', resource) %}
+                                <a href="{{ path('app_resource_show', { id: resource.id }) }}" class="btn btn-sm btn-info" title="Voir la ressource">
+                                    <i class="fas fa-edit"></i> Voir
+                                </a>
+                            {% endif %}
+
+                            {% if is_granted('RESOURCE_EDIT', resource) %}
+                                <a href="{{ path('app_resource_edit', { id: resource.id }) }}" class="btn btn-sm btn-secondary" title="Modifier la ressource">
+                                    <i class="fas fa-edit"></i> Modifier
+                                </a>
+                            {% endif %}
+
+                            {% if is_granted('RESOURCE_DELETE', resource) %}
+                                <form method="post" action="{{ path('app_resource_delete', { id: resource.id }) }}" onsubmit="return confirm('Êtes-vous sur de vouloir supprimer cette ressource ?');" style="display: inline-block;">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ resource.id) }}">
+                                    <button class="btn btn-sm btn-danger" aria-label="Supprimer la ressource">
+                                        <i class="fas fa-trash"></i> Supprimer
+                                    </button>
+                                </form>
+                            {% endif %}
                         </td>
                     </tr>
                     {% else %}
