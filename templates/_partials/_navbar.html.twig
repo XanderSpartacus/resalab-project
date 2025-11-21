@@ -14,26 +14,30 @@
                     <a class="nav-link {{ app.request.get('_route') == 'app_main' ? 'active' : '' }}"
                        aria-current="page" href="{{ path('app_main') }}">Accueil</a>
                 </li>
-                {% if is_granted('ROLE_ADMIN') %}
-                <li class="nav-item">
-                    <a class="nav-link {{ app.request.get('_route') == 'admin_resource_index' ? 'active' : '' }}"
-                       href="{{ path('admin_resource_index') }}">
-                        Liste des ressources
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ app.request.get('_route') == 'app_reservation_index' ? 'active' : '' }}"
-                       href="{{ path('app_reservation_index') }}">
-                        Liste des réservations
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ app.request.get('_route') == 'admin_resource_new' ? 'active' : '' }}"
-                       href="{{ path('admin_resource_new') }}">
-                        Ajouter une ressource
-                    </a>
-                </li>
+
+                {% if app.user %}
+                    <li class="nav-item">
+                        <a class="nav-link {{ app.request.get('_route') == 'app_reservation_index' ? 'active' : '' }}"
+                           href="{{ path('app_reservation_index') }}">
+                            {% if is_granted('ROLE_ADMIN') %}
+                                Gérer les réservations
+                            {% else %}
+                                Mes réservations
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ app.request.get('_route') == 'app_resource_index' ? 'active' : '' }}"
+                           href="{{ path('admin_resource_index') }}">
+                            {% if is_granted('ROLE_ADMIN') %}
+                                Gérer les ressources
+                            {% else %}
+                                Voir les ressources
+                            {% endif %}
+                        </a>
+                    </li>
                 {% endif %}
+
             </ul>
             <ul class="navbar-nav ms-auto">
                 {% if app.user %}

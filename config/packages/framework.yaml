@@ -6,8 +6,8 @@ framework:
     session: true
 
     # Forcer l’URL de base
-    router:
-        default_uri: 'http://127.0.0.1:8000'
+    #router:
+        #default_uri: 'http://127.0.0.1:8000/fr'
 
     #esi: true
     #fragments: true

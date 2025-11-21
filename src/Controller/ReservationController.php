@@ -1,37 +1,56 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller;
 
 use App\Entity\Reservation;
 use App\Form\ReservationType;
 use App\Repository\ReservationRepository;
+use App\Security\Voter\ReservationVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/admin/reservation')] // Route de base modifiée
-#[IsGranted('ROLE_ADMIN')]
+#[Route('/reservation')] // Route de base modifiée
 class ReservationController extends AbstractController
 {
     #[Route(name: 'app_reservation_index', methods: ['GET'])]
     public function index(ReservationRepository $reservationRepository): Response
     {
+        $reservations = [];
+        if($this->isGranted('ROLE_ADMIN')){
+            $reservations = $reservationRepository->findAll();
+        } else {
+            $reservations = $reservationRepository->findBy(['reservedBy' => $this->getUser()]);
+        }
+
         return $this->render('reservation/index.html.twig', [
-            'reservations' => $reservationRepository->findAll(),
+            'reservations' => $reservations,
         ]);
     }
 
     #[Route('/new', name: 'app_reservation_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        // On ajoute cette ligne au début de la méthode
+        $this->denyAccessUnlessGranted(ReservationVoter::CREATE);
+
         $reservation = new Reservation();
-        $form = $this->createForm(ReservationType::class, $reservation); // Utilisation de ReservationType personnalisé
+        $isAdmin = $this->isGranted('ROLE_ADMIN');
+
+        // Utilisation de ReservationType personnalisé
+        $form = $this->createForm(ReservationType::class, $reservation, [
+            'is_admin' => $isAdmin,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Si l'utilisateur n'est pas admin, on force le propriétaire à être l'utilisateur connecté
+            if(!$isAdmin){
+                $reservation->setReservedBy($this->getUser());
+            }
+
             $reservation->setCreatedAt(new \DateTimeImmutable()); // Initialisation de createdAt
             $reservation->setUpdatedAt(new \DateTimeImmutable()); // Initialisation de updatedAt
             $entityManager->persist($reservation);
@@ -51,6 +70,8 @@ class ReservationController extends AbstractController
     #[Route('/{id}', name: 'app_reservation_show', methods: ['GET'])]
     public function show(Reservation $reservation): Response
     {
+        $this->denyAccessUnlessGranted(ReservationVoter::VIEW, $reservation);
+
         return $this->render('reservation/show.html.twig', [
             'reservation' => $reservation,
         ]);
@@ -59,7 +80,12 @@ class ReservationController extends AbstractController
     #[Route('/{id}/edit', name: 'app_reservation_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Reservation $reservation, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(ReservationType::class, $reservation);
+        $this->denyAccessUnlessGranted(ReservationVoter::EDIT, $reservation);
+
+        $isAdmin = $this->isGranted('ROLE_ADMIN');
+        $form = $this->createForm(ReservationType::class, $reservation, [
+            'is_admin' => $isAdmin,
+        ] );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -80,6 +106,8 @@ class ReservationController extends AbstractController
     #[Route('/{id}', name: 'app_reservation_delete', methods: ['POST'])]
     public function delete(Request $request, Reservation $reservation, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted(ReservationVoter::DELETE, $reservation);
+
         if ($this->isCsrfTokenValid('delete'.$reservation->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($reservation);
             $entityManager->flush();

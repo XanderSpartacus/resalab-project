@@ -34,37 +34,41 @@ class ReservationType extends AbstractType
                 'required' => false,
                 'attr' => ['rows' => 3],
             ])
-            ->add('status', ChoiceType::class, [
-                'label' => 'Statut',
-                'choices' => [
-                    'En attente' => 'pending',
-                    'Approuvée' => 'approved',
-                    'Rejeté' => 'rejected',
-                    'Annulée' => 'cancelled',
-                ],
-                'attr' => ['class' => 'form-select'],
-            ])
             ->add('resource', EntityType::class, [
                 'class' => Resource::class,
                 'choice_label' => 'name',
                 'placeholder' => 'Choisir une ressource',
                 'label' => 'Ressource',
                 'attr' => ['class' => 'form-select'],
-            ])
-            ->add('reservedBy', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'email',
-                'placeholder' => 'Choisir un utilisateur',
-                'label' => 'Réservé par',
-                'attr' => ['class' => 'form-select'],
-            ])
-        ;
+            ]);
+            if ($options['is_admin']) {
+                $builder
+                    ->add('status', ChoiceType::class, [
+                        'label' => 'Statut',
+                        'choices' => [
+                            'En attente' => 'pending',
+                            'Approuvée' => 'approved',
+                            'Rejeté' => 'rejected',
+                            'Annulée' => 'cancelled',
+                        ],
+                        'attr' => ['class' => 'form-select'],
+                    ])
+                    ->add('reservedBy', EntityType::class, [
+                        'class' => User::class,
+                        'choice_label' => 'email',
+                        'placeholder' => 'Choisir un utilisateur',
+                        'label' => 'Réservé par',
+                        'attr' => ['class' => 'form-select'],
+                    ]);
+            }
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Reservation::class,
+            'is_admin' => false,
         ]);
     }
 }
