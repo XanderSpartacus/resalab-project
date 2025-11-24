@@ -9,7 +9,7 @@ framework:
     #router:
         #default_uri: 'http://127.0.0.1:8000/fr'
 
-    #esi: true
+    esi: true
     #fragments: true
 
 when@test:

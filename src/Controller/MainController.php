@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Services\ResourceStatsService;
+use App\Service\ResourceStatsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,15 +11,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     #[Route('/', name: 'app_main')]
-    public function index(ResourceStatsService $resourceStatsService): Response // Injection du service
+    // AVANT : public function index(ResourceStatsService $resourceStatsService): Response
+    public function index(): Response // Injection du service
     {
-        $totalResources = $resourceStatsService->getTotalResourcesCount(); // Appel du service
-        $resourcesByCategory = $resourceStatsService->getResourcesCountByCategory(); // Appel du service
+        // AVANT : $totalResources = $resourceStatsService->getTotalResourcesCount(); // Appel du service
+        // AVANT : $resourcesByCategory = $resourceStatsService->getResourcesCountByCategory(); // Appel du service
 
         return $this->render('main/index.html.twig', [
             'project_name' => 'ResaLab',
-            'totalResources' => $totalResources, // Passage des données au template
-            'resourcesByCategory' => $resourcesByCategory, // Passage des données au template
+            // AVANT : 'totalResources' => $totalResources, // Passage des données au template
+            // AVANT : 'resourcesByCategory' => $resourcesByCategory, // Passage des données au template
         ]);
     }
 

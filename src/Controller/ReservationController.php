@@ -6,7 +6,7 @@ use App\Entity\Reservation;
 use App\Form\ReservationType;
 use App\Repository\ReservationRepository;
 use App\Security\Voter\ReservationVoter;
-use App\Services\ReservationNotifierService;
+use App\Service\ReservationNotifierService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

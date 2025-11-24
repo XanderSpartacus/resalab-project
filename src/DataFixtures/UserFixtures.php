@@ -33,6 +33,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
         $user->setEmail('user@resalab.com');
         $password = $this->hasher->hashPassword($user, 'password');
         $user->setPassword($password);
+        $user->setIsVerified(true);
         // Le rôle ROLE_USER est ajouté automatiquement par Symfony
         $manager->persist($user);
 
@@ -41,6 +42,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
         $admin->setEmail('admin@resalab.com');
         $password = $this->hasher->hashPassword($admin, 'password');
         $admin->setPassword($password);
+        $user->setIsVerified(true);
         $admin->setRoles(['ROLE_ADMIN']);
         $manager->persist($admin);
 

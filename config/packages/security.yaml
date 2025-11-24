@@ -37,6 +37,8 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/_profiler, ips: [ 1.2.3.4 ] }
+        - { path: ^/_wdt, ips: [ 1.2.3.4 ] }
 
 when@test:
     security:

@@ -33,11 +33,40 @@ class ResourceController extends AbstractController
             $resources = $resourceRepository->findBy([], ['createdAt' => 'DESC']);
         }
 
-        return $this->render('resource/index.html.twig', [
+        // Génère le HTML
+        $response = $this->render('resource/index.html.twig', [
             'resources' => $resources,
             'categories' => $categories,
             'selectedCategoryId' => $selectedCategoryId
         ]);
+
+        // --- MISE EN CACHE HTTP DE LA PAGE ---
+        // Pour une liste de ressources, on peut définir un Last-Modified ou un Etag.
+        // Ici, nous utilisons la date la plus récente de création/mise à jour d'une ressource.
+        $lastModified = null;
+        if(!empty($resources)){
+            // Trouver la date de dernière modification parmi les ressources
+            foreach($resources as $resource){
+                $resourceDate = $resource->getUpdatedAt() ?? $resource->getCreatedAt();
+                if ($resourceDate && ($lastModified === null || $resourceDate > $lastModified)){
+                    $lastModified = $resourceDate;
+                }
+            }
+        }
+
+        if($lastModified){
+            $response->setLastModified($lastModified); // Cache de validation
+        }
+
+        $response->setSharedMaxAge(3600); // Cache d'expiration public pour 1 heure
+        $response->setPublic(); // Rend la page cachable par les proxys (Varnish, CDN...)
+
+        // Vérifie si la réponse n'a pas été modifiée (optimisation)
+        if($response->isNotModified($request)){
+            return $response;
+        }
+
+        return $response;
     }
 
     #[Route('/new', name: 'app_resource_new', methods: ['GET', 'POST'])]

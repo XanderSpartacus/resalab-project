@@ -19,7 +19,7 @@ services:
         resource: '../src/'
 
 
-    App\Services\ReservationNotifierService:
+    App\Service\ReservationNotifierService:
         arguments:
             $adminEmail: '%admin_email%'
     # add more service definitions when explicit configuration is needed
